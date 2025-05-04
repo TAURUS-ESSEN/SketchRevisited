@@ -1,19 +1,120 @@
 'use strict';
 
 const boardContainer = document.getElementById("board");
-console.log(board);
+const boardGridButton = document.getElementById("tumbler_grid");
+const boardGridTumbler = document.getElementById("tumbler1__img");
+const colorPickersForm = document.getElementById("colorPickersForm");
+const radiobuttons = document.querySelectorAll('input[type="radio"]');
+let pointer = "black";
 
-createBoardCell(28); 
+createBoardCell(); 
 
-function createBoardCell(divs = 16) {
+function createBoardCell(divs = 8) {
     for (let i=1; i<=divs; i++) {
         const string = document.createElement("div");
         string.classList.add("cellString");
         boardContainer.appendChild(string);
         for (let j=1; j<=divs; j++) {
             const cell = document.createElement("div");
-            cell.classList.add("cell");
+            cell.classList.add("cell",  "cellOn");
             string.appendChild(cell);
         }
     }
+    drawBoard() 
 }
+function drawBoard() {
+    const cells = document.querySelectorAll(".cell");
+    let isMouseDown = false;
+
+    boardContainer.addEventListener("mousedown", (e) => {
+        if (e.button === 0) isMouseDown = true;
+    });
+
+    boardContainer.addEventListener("mouseup", () => {
+        isMouseDown = false;
+    });
+
+    document.addEventListener("mouseup", () => {
+        isMouseDown = false;
+    });
+
+    cells.forEach(cell => {
+        cell.addEventListener("mousemove", () => {
+            if (isMouseDown) {
+                if (typeof pointer === "function") {
+                    cell.style.backgroundColor = pointer();
+                } else if (pointer.slice(0,3) === "rgb") {
+                    let currentOpacity = Number(cell.style.backgroundColor.slice(-4,-1)) + 0.1;
+                    cell.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity})`;
+                } else {
+                    cell.style.backgroundColor = pointer;
+                }
+            }
+        });
+
+        cell.addEventListener("mousedown", (e) => {
+            if (e.button === 0) {
+                if (typeof pointer === "function") {
+                    cell.style.backgroundColor = pointer();
+                } else if (pointer.slice(0,3) === "rgb") {
+                    let currentOpacity = Number(cell.style.backgroundColor.slice(-4,-1)) + 0.1;
+                    cell.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity})`;
+                } else {
+                    cell.style.backgroundColor = pointer;
+                }
+            }
+        });
+    });
+}
+
+
+boardGridButton.addEventListener("click", () => {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => cell.classList.toggle("cellOn"));
+    boardGridTumbler.classList.toggle("tumbler-rotate")
+})
+
+radiobuttons.forEach(radiobutton => {
+    radiobutton.addEventListener("change", () => {
+        if (radiobutton.checked) {
+            switch (radiobutton.value) { 
+                case "black": 
+                pointer = "black";
+                break; 
+                case "multicolor": 
+                pointer = multicolor;
+                break; 
+                case "progressive": 
+                pointer = "rgba(0, 0, 0, 0.1)"
+                break; 
+                case "eraser": 
+                pointer = eraser();
+                break; 
+            }
+        }
+    })
+})
+
+function multicolor() {
+    let a = Math.floor(Math.random() * 256); 
+    let b = Math.floor(Math.random() * 256); 
+    let c = Math.floor(Math.random() * 256); 
+    let  colorPicker  = "rgb(" + a + ", " + b + ", " + c + ")"; 
+    return colorPicker 
+}
+
+function progressive() {
+    let  colorPicker  = "rgba(0, 0, 0, 0.1)"; 
+    return colorPicker 
+}
+
+function eraser() {
+    let colorPicker = '';
+    return colorPicker
+}
+
+const slider = document.getElementById("slider");
+slider.addEventListener("input", () => {
+    boardContainer.textContent = '';
+    createBoardCell(slider.value)
+});

@@ -9,12 +9,46 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="board" id="board"></div>
-        <!-- <div class="board__menu">
-            <input type="number"> <button>Größe</button> -->
-            <!-- <input type="number"> <button>Größe</button> -->
+        
+            <div class="board" id="board">
+            </div>
+            <div class="tv"></div>
+            <div id="tumbler1"><button id="tumbler_grid">x<img  id="tumbler1__img" src="./img/tumbler0.png" alt=""></button></div>
+            
+            <div>
+                <form class="colorPickersForm" id="colorPickersForm">
+                    <label>
+                      <input type="radio" name="option" value="black" checked />
+                      Black Color
+                    </label>
+                  
+                    <label>
+                      <input type="radio" name="option" value="multicolor" />
+                      Multicolor
+                    </label>
+                  
+                    <label>
+                        <input type="radio" name="option" value="progressive" />
+                      Progressive Dark
+                      </label>
+
+                    <label>
+                        <input type="radio" name="option" value="eraser" />
+                        Eraser
+                      </label>
+                      <div class="slider-box">
+                        <input type="range" min="2" max="100" value="16" id="slider"><p >Grid size</p>
+                        <!-- <span id="value">16</span> -->
+                      </div>
+                  </form>
+            </div>
         </div>
-    </div>
+        <div class="board__menu">
+            <!-- <input type="number" class="klein__input" placeholder="bis 100" id="boardSize"> 
+                <button id="boardSizeButton">Größe</button> -->
+
+                <button id="resetButton">Reset</button>
+        </div>
     
 </body>
 </html>
