@@ -7,14 +7,6 @@
     box-sizing: border-box;
 }
 
-
-/* @font-face {
-    font-family: Galdeano;
-    src: url('../fonts/Galdeano-Regular.woff2') format('woff2'),
-        url('../fonts/Galdeano-Regular.ttf') format('truetype');
-        font-display: swap;
-} */
-
 body {
     background-color: var(--body-background);
     background-image: url('../img/45degreee_fabric.webp');
@@ -35,33 +27,28 @@ body {
     min-width: 900px;
     min-height: 700px;
     background-image: url('../img/tv-1.png');
-    /* background-color: aqua; */
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    height: auto;
-    /* margin: 0 auto; */
+    /* height: auto; */
     position: absolute;
     top: -85px;
-    left: 225px;
-    opacity: 1;
+    /* left: 225px; */
+    /* opacity: 1; */
 }
  
 .board {
     display: flex;
     flex-direction: column;
-    /* padding: 1em; */
-    width: 520px;
-    height: 430px;
-    /* top: 100px;
-    left: 80px; */
+    width: 523px;
+    height: 440px;
     z-index: 5;
-
-
-    /* background: var(--wrapper-background); */
-    background: beige;
     border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.642);
+    position: relative;
+    left: -74px;
+    top: -3px;
+    background-color: white;
+    box-shadow: 0 0 25px black;
 }
 
 .cellString {
@@ -69,7 +56,6 @@ body {
     flex-wrap: nowrap;
     width: 100%;
     height: 100%;
-    /* background-color: green; */
 }
 
 .cell {
@@ -82,12 +68,10 @@ body {
 
 .cellOn {
     border: 1px solid black;
-    /* transition: 1.5s ; */
 }
 
 
 input, button {
-    /* min-height: 30px; */
     padding: 0.3em;
 
     border: 1px solid var(--primary-color);
@@ -145,7 +129,7 @@ button:hover {
     width: 110px;
     position: absolute;
     top:0;
-    right: 175px;
+    right: 250px;
     opacity: 1;
     transition: 0.5s ease-out;
     cursor: pointer;
@@ -160,10 +144,9 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* background-color: rgba(249, 249, 249, 0.448); */
     position: absolute;
-    right: 160px;
-    bottom: 20px;
+    right: 230px;
+    bottom: 30px;
 }
 
 label, label > input {

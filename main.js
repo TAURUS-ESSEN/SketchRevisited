@@ -84,10 +84,10 @@ radiobuttons.forEach(radiobutton => {
 })
 
 function multicolor() {
-    let a = Math.floor(Math.random() * 256); 
-    let b = Math.floor(Math.random() * 256); 
-    let c = Math.floor(Math.random() * 256); 
-    let  colorPicker  = "rgb(" + a + ", " + b + ", " + c + ")"; 
+    const r = Math.floor(Math.random() * 128 + 127);
+    const g = Math.floor(Math.random() * 128 + 127);
+    const b = Math.floor(Math.random() * 128 + 127);
+    let  colorPicker  = "rgb(" + r + ", " + g + ", " + b + ")"; 
     return colorPicker 
 }
 
