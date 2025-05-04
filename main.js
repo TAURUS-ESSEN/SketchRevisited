@@ -30,43 +30,31 @@ function drawBoard() {
         if (e.button === 0) isMouseDown = true;
     });
 
-    boardContainer.addEventListener("mouseup", () => {
-        isMouseDown = false;
-    });
-
     document.addEventListener("mouseup", () => {
         isMouseDown = false;
     });
 
+    function paint(cell) {
+        if (typeof pointer === "function") {
+            cell.style.backgroundColor = pointer();
+        } else if (pointer.slice(0, 3) === "rgb") {
+            let currentOpacity = Number(cell.style.backgroundColor.slice(-4, -1)) + 0.1;
+            cell.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity})`;
+        } else {
+            cell.style.backgroundColor = pointer;
+        }
+    }
+
     cells.forEach(cell => {
-        cell.addEventListener("mousemove", () => {
-            if (isMouseDown) {
-                if (typeof pointer === "function") {
-                    cell.style.backgroundColor = pointer();
-                } else if (pointer.slice(0,3) === "rgb") {
-                    let currentOpacity = Number(cell.style.backgroundColor.slice(-4,-1)) + 0.1;
-                    cell.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity})`;
-                } else {
-                    cell.style.backgroundColor = pointer;
-                }
-            }
+        cell.addEventListener("mousedown", (e) => {
+            if (e.button === 0) paint(cell);
         });
 
-        cell.addEventListener("mousedown", (e) => {
-            if (e.button === 0) {
-                if (typeof pointer === "function") {
-                    cell.style.backgroundColor = pointer();
-                } else if (pointer.slice(0,3) === "rgb") {
-                    let currentOpacity = Number(cell.style.backgroundColor.slice(-4,-1)) + 0.1;
-                    cell.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity})`;
-                } else {
-                    cell.style.backgroundColor = pointer;
-                }
-            }
+        cell.addEventListener("mousemove", () => {
+            if (isMouseDown) paint(cell);
         });
     });
 }
-
 
 boardGridButton.addEventListener("click", () => {
     const cells = document.querySelectorAll(".cell");
