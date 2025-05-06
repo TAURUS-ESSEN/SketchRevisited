@@ -3,14 +3,13 @@
 const boardContainer = document.getElementById("board");
 const boardGridButton = document.getElementById("tumbler_grid");
 const boardGridTumbler = document.getElementById("tumbler1__img");
-const colorPickersForm = document.getElementById("colorPickersForm");
 const radiobuttons = document.querySelectorAll('input[type="radio"]');
 let pointer = "black";
 
 createBoardCell(); 
 
-function createBoardCell(divs = 8) {
-    for (let i=1; i<=divs; i++) {
+function createBoardCell(divs = 12) {
+    for (let i = 1; i <= divs; i++) {
         const string = document.createElement("div");
         string.classList.add("cellString");
         boardContainer.appendChild(string);
@@ -20,9 +19,9 @@ function createBoardCell(divs = 8) {
             string.appendChild(cell);
         }
     }
-    drawBoard() 
+    enableDrawing()
 }
-function drawBoard() {
+function enableDrawing() {
     const cells = document.querySelectorAll(".cell");
     let isMouseDown = false;
 
@@ -88,11 +87,6 @@ function multicolor() {
     const g = Math.floor(Math.random() * 128 + 127);
     const b = Math.floor(Math.random() * 128 + 127);
     let  colorPicker  = "rgb(" + r + ", " + g + ", " + b + ")"; 
-    return colorPicker 
-}
-
-function progressive() {
-    let  colorPicker  = "rgba(0, 0, 0, 0.1)"; 
     return colorPicker 
 }
 
